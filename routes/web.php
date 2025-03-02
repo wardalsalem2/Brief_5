@@ -94,7 +94,7 @@ Route::get('/home', [UserController::class, 'showhome'])
     Route::middleware(['role:owner'])
         ->group(function () {
            
-            Route::get('/owner/dashboard', [OwnerProfileController::class, 'index'])->name('owner.dashboard');
+            Route::get('/owner/dashboard', [OwnerProfileController::class, 'index'])->name('Owner.dashboard');
             Route::get('/Owner', [OwnerProfileController::class, 'index'])->name('Owner.index');
             Route::get('/Owner/create', [OwnerProfileController::class, 'create'])->name('Owner.create');
             Route::post('/Owner/store', [OwnerProfileController::class, 'store'])->name('Owner.store');

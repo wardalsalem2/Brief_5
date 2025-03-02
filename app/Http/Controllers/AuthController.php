@@ -38,7 +38,7 @@ class AuthController extends Controller
 
             return match ($user->role) {
                 'admin' => redirect()->route('admin.dashbord')->with('success', 'Welcome, Admin!'),
-                'owner' => redirect()->route('owner.dashbord')->with('success', 'Welcome, Owner!'),
+                'owner' => redirect()->route('Owner.dashboard')->with('success', 'Welcome, Owner!'),
                 default => redirect()->route('user.home')->with('success', 'Welcome, User!'),
             };
         }
