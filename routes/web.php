@@ -44,7 +44,8 @@ use App\Http\Controllers\ChaletController;
 
 //ward + sondos //
 
-
+Route::middleware(['role:user'])
+->group(function () {
 
 Route::get('/chalets/{chaletId}/book', [BookingController::class, 'showBookingForm'])->name('bookings.create');
 Route::post('/chalets/{chaletId}/book', [BookingController::class, 'createBooking'])->name('bookings.store');
@@ -64,7 +65,7 @@ Route::get('/payment', [BookingController::class, 'showPaymentPage'])->name('pay
 Route::post('/confirm-payment', [BookingController::class, 'confirmPayment'])->name('confirm.payment');
 Route::get('/chalets/{chaletId}', [StoreController::class, 'showChalet'])->name('chalet.show');
 
-
+});
 //---------------------------------------------------------------------------
 // raghad //
 
