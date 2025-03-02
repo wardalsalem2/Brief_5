@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\OwnerProfileController;
+use App\Http\Controllers\AdminOwnerController;
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,18 +19,67 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('auth.login&reg');
+// })->name('login');
+
+
+
+
+// Route::get('/detailse', function () {
+//     return view('user.details');
+// });
+
+// Route::get('/chalets', function () {
+//     return view('user.chalets');
+// });
+//---------------------------------------------------------------------------
+
+//ward + sondos //
+
+
+
+Route::get('/chalets/{chaletId}/book', [BookingController::class, 'showBookingForm'])->name('bookings.create');
+Route::post('/chalets/{chaletId}/book', [BookingController::class, 'createBooking'])->name('bookings.store');
+
+Route::resource('profile_user', UserController::class)->only(['index', 'update']);    //for profail user
+Route::delete('profile_user/cancelBooking/{id}', [UserController::class, 'cancelBooking'])
+    ->name('profile_user.cancelBooking');
+
+Route::post('/add-comment', [StoreController::class, 'addComment'])->name('add.comment');   //for user pages 
+Route::get('/chalets', [StoreController::class, 'showingAllChalets'])->name('showingAllChalets');
+Route::get('/chalets/{chalet}', [StoreController::class, 'showDetails'])->name('showChalet');
+Route::get('/contact', [StoreController::class, 'contact'])->name('contact');
+Route::post('/contact', [StoreController::class, 'storeContact'])->name('contact.store');
+
+
+Route::get('/payment', [BookingController::class, 'showPaymentPage'])->name('payment.page');  //for payment
+Route::post('/confirm-payment', [BookingController::class, 'confirmPayment'])->name('confirm.payment');
+Route::get('/chalets/{chaletId}', [StoreController::class, 'showChalet'])->name('chalet.show');
+
+
+//---------------------------------------------------------------------------
+// raghad //
+
 Route::get('/', function () {
-    return view('auth.login&reg');
-});
-Route::get('/index', function () {
-    return view('user.index');
-});
-Route::get('/detailse', function () {
-    return view('user.details');
-});
-Route::get('/profaile', function () {
-    return view('user.profaile');
-});
-Route::get('/chalets', function () {
-    return view('user.chalets');
-});
+    return view('auth.login_reg'); 
+})->name('login');
+Route::get('/register', function () {
+    return view('auth.login_reg');
+})->name('register');  
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+Route::get('/admin/dashbord', [AdminOwnerController::class, 'index'])
+    ->middleware('role:admin')
+    ->name('admin.dashbord');
+
+Route::get('/owner/dashbord', [OwnerProfileController::class, 'index'])
+    ->middleware('role:owner')
+    ->name('owner.dashbord');
+
+Route::get('/home', [UserController::class, 'showhome'])
+    ->middleware('role:user')
+    ->name('user.home');

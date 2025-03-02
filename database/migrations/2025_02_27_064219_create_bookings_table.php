@@ -19,7 +19,6 @@ return new class extends Migration
             $table->date('end');
             $table->decimal('total_price', 10, 2);
             $table->timestamps();
-
         });
     }
 

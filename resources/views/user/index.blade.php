@@ -1,5 +1,51 @@
 @include('component.header')
+<style>
+    .fixed-img-size {
+        width: 100%;
+        height: 350px;
+    }
 
+    .fixed-height {
+        height: 350px;
+    }
+
+    .card-fixed-height {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-body {
+        flex: 1;
+        overflow: hidden;
+    }
+
+    .disabled-card {
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    .disabled {
+        pointer-events: none;
+        background-color: gray !important;
+        border-color: gray !important;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+</style>
 <!-- Carousel Start -->
 <div class="container-fluid p-0 mb-5">
     <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -11,7 +57,8 @@
                         <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxurious luxury
                         </h6>
                         <h1 class="display-3 text-white mb-4 animated slideInDown">Discover Luxurious chalets</h1>
-                        <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our chalets</a>
+                        <a href="{{route('showingAllChalets')}}"
+                            class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our chalets</a>
                     </div>
                 </div>
             </div>
@@ -46,9 +93,19 @@
         <div class="row g-5 align-items-center">
             <div class="col-lg-6">
                 <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
-                <h1 class="mb-4">Welcome to <span class="text-primary text-uppercase">Chalets</span></h1>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et
-                    eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                <h1 class="mb-4">Welcome to <span class="text-primary text-uppercase"
+                        style="color: orange;">Chalets</span></h1>
+                <p class="mb-4">We are a platform specializing in the rental of luxurious <span
+                        style="color: orange;">chalets</span> that provide an exceptional relaxation experience in
+                    breathtaking natural surroundings. We offer a variety of chalets to suit your needs, whether you're
+                    looking for a peaceful retreat away from the city's hustle and bustle or the perfect place to
+                    celebrate with friends and family. Our goal is to deliver an unforgettable experience with
+                    high-quality service and accommodations equipped with the latest comforts.</p>
+                <p>We strive to offer the best chalets that meet your expectations and provide comfort and luxury at
+                    every moment. Whether you're a renter looking for the perfect getaway or a chalet owner wanting to
+                    rent out your property, we are here to provide a seamless and secure experience that meets all your
+                    needs.</p>
+
 
             </div>
             <div class="col-lg-6">
@@ -75,123 +132,97 @@
 
 
 <!-- chalete Start -->
-<div class="container-xxl py-5" id="chalete">
+<div class="container-xxl py-5" id="chalets">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title text-center text-primary text-uppercase">Top Three Chalets</h6>
             <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Chalets</span></h1>
         </div>
+
+
         <div class="row g-4">
-            <!-- Chalet 1 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="room-item shadow rounded overflow-hidden">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="img/room-1.jpg" alt="">
-                        <small
-                            class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$100/Night</small>
-                    </div>
-                    <div class="p-4 mt-2">
-                        <div class="d-flex justify-content-between mb-3">
-                            <h5 class="mb-0">Junior Suite</h5>
-                            <div class="ps-2">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
+            @foreach ($chalets as $chalet)
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div
+                        class="room-item d-flex flex-column shadow rounded overflow-hidden position-relative {{ $chalet->status == 'not available' ? 'disabled-card' : '' }}">
+                        <div class="position-relative">
+                            <img class="img-fluid fixed-img-size"
+                                src="{{ asset($chalet->images->first()->image ?? 'img/default.jpg') }}"
+                                alt="{{ $chalet->name }}">
+                            <small
+                                class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">
+                                ${{ $chalet->price_per_day }}/Day
+                            </small>
+                        </div>
+                        <div class="p-4 mt-2 card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <h5 class="mb-0">{{ $chalet->name }}</h5>
+                                <div class="ps-2">
+                                    {{ number_format($chalet->reviews_avg_rate, 2) }}
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <small
+                                            class="fa fa-star {{ $i <= $chalet->reviews_avg_rate ? 'text-primary' : 'text-muted' }}"></small>
+                                    @endfor
+                                </div>
+                            </div>
+                            <p class="text-body mb-3"><strong>Description:</strong>
+                                {{ \Illuminate\Support\Str::limit($chalet->description, 80) }}</p>
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li class="d-flex align-items-center">
+                                    <i class="fa fa-bed text-primary me-2"></i>
+                                    {{ $chalet->bedrooms }}
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i class="fa fa-bath text-primary me-2"></i>
+                                    {{ $chalet->bathrooms }}
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i class="fa {{ $chalet->wifi ? 'fa-wifi' : 'fa-times-circle' }} text-primary me-2"></i>
+                                    {{ $chalet->wifi ? 'Yes' : 'No' }}
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i
+                                        class="fa {{ $chalet->pool ? 'fa-swimming-pool' : 'fa-times-circle' }} text-primary me-2"></i>
+                                    {{ $chalet->pool ? 'Yes' : 'No' }}
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i class="fa fa-car text-primary me-2"></i>
+                                    {{ $chalet->parking_spaces }}
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i class="fa fa-eye text-primary me-2"></i>
+                                    {{ ucfirst($chalet->view) }}
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i
+                                        class="fa {{ $chalet->pets_allowed ? 'fa-paw' : 'fa-times-circle' }} text-primary me-2"></i>
+                                    {{ $chalet->pets_allowed ? 'Yes' : 'No' }}
+                                </li>
+                            </ul>
+
+
+                            <div class="d-flex justify-content-between">
+                                <a class="btn btn-sm btn-primary rounded py-2 px-4 {{ $chalet->status == 'not available' ? 'disabled' : '' }}"
+                                    href="{{ route('showChalet', $chalet) }}">
+                                    View Details & Booking
+                                </a>
                             </div>
                         </div>
-                        <div class="d-flex mb-3">
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2
-                                Bath</small>
-                            <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
-                        </div>
-                        <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-                            diam stet diam sed stet lorem.</p>
-                        <div class="d-flex justify-content-between">
-                            <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
-                            <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Chalet 2 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="room-item shadow rounded overflow-hidden">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="img/room-2.jpg" alt="">
-                        <small
-                            class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$100/Night</small>
-                    </div>
-                    <div class="p-4 mt-2">
-                        <div class="d-flex justify-content-between mb-3">
-                            <h5 class="mb-0">Executive Suite</h5>
-                            <div class="ps-2">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
+                        @if ($chalet->status == 'not available')
+                            <div class="overlay">
+                                <span class="overlay-text">Not Available</span>
                             </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2
-                                Bath</small>
-                            <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
-                        </div>
-                        <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-                            diam stet diam sed stet lorem.</p>
-                        <div class="d-flex justify-content-between">
-                            <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
-                            <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
-                        </div>
+                        @endif
                     </div>
                 </div>
-            </div>
-            <!-- Chalet 3 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                <div class="room-item shadow rounded overflow-hidden">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="img/room-3.jpg" alt="">
-                        <small
-                            class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">$100/Night</small>
-                    </div>
-                    <div class="p-4 mt-2">
-                        <div class="d-flex justify-content-between mb-3">
-                            <h5 class="mb-0">Super Deluxe</h5>
-                            <div class="ps-2">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                            <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2
-                                Bath</small>
-                            <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
-                        </div>
-                        <p class="text-body mb-3">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-                            diam stet diam sed stet lorem.</p>
-                        <div class="d-flex justify-content-between">
-                            <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
-                            <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
-        <!-- See more link -->
         <div class="text-center mt-4">
-            <a href="chalets#chalets" class="btn btn-sm btn-primary rounded py-2 px-4">See All </a>
+            <a href="{{route('showingAllChalets')}}" class="btn btn-sm btn-primary rounded py-2 px-4">See All </a>
         </div>
     </div>
 </div>
-<!-- chalet End -->
+<!-- chalete end -->
 
 <!-- Service Start -->
 <div class="container-xxl py-5" id="Service">
@@ -278,7 +309,99 @@
 </div>
 <!-- Service end -->
 
+{{-- discount --}}
+<hr>
+<div class="container-xxl py-5" id="discounted-chalets">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title text-center text-primary text-uppercase">Special Discounts</h6>
+            <h1 class="mb-5">Discover Our <span class="text-primary text-uppercase">Discounted Chalets</span></h1>
+        </div>
 
+        <div class="row g-4">
+            @foreach ($discountedChalets as $chalet)
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div
+                        class="room-item d-flex flex-column shadow rounded overflow-hidden position-relative {{ $chalet->status == 'not available' ? 'disabled-card' : '' }}">
+                        <div class="position-relative">
+                            <img class="img-fluid fixed-img-size"
+                                src="{{ asset($chalet->images->first()->image ?? 'img/default.jpg') }}"
+                                alt="{{ $chalet->name }}">
+                            <small
+                                class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">
+                                <del class="text-danger">${{ $chalet->price_per_day }}</del>
+                                ${{ $chalet->price_per_day - ($chalet->price_per_day * $chalet->discount / 100) }}/Day
+                            </small>
+                        </div>
+                        <div class="p-4 mt-2 card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <h5 class="mb-0">{{ $chalet->name }}</h5>
+                                <div class="ps-2">
+                                    {{ number_format($chalet->reviews_avg_rate, 2) }}
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <small
+                                            class="fa fa-star {{ $i <= $chalet->reviews_avg_rate ? 'text-primary' : 'text-muted' }}"></small>
+                                    @endfor
+                                </div>
+                            </div>
+                            <p class="text-body mb-3"><strong>Description:</strong>
+                                {{ \Illuminate\Support\Str::limit($chalet->description, 80) }}</p>
+                            <p class="text-danger"><strong>Discount:</strong> {{ $chalet->discount }}% OFF</p>
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li class="d-flex align-items-center">
+                                    <i class="fa fa-bed text-primary me-2"></i>
+                                    {{ $chalet->bedrooms }}
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i class="fa fa-bath text-primary me-2"></i>
+                                    {{ $chalet->bathrooms }}
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i class="fa {{ $chalet->wifi ? 'fa-wifi' : 'fa-times-circle' }} text-primary me-2"></i>
+                                    {{ $chalet->wifi ? 'Yes' : 'No' }}
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i
+                                        class="fa {{ $chalet->pool ? 'fa-swimming-pool' : 'fa-times-circle' }} text-primary me-2"></i>
+                                    {{ $chalet->pool ? 'Yes' : 'No' }}
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i class="fa fa-car text-primary me-2"></i>
+                                    {{ $chalet->parking_spaces }}
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i class="fa fa-eye text-primary me-2"></i>
+                                    {{ ucfirst($chalet->view) }}
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i
+                                        class="fa {{ $chalet->pets_allowed ? 'fa-paw' : 'fa-times-circle' }} text-primary me-2"></i>
+                                    {{ $chalet->pets_allowed ? 'Yes' : 'No' }}
+                                </li>
+                            </ul>
+                            <div class="d-flex justify-content-between">
+                                <a class="btn btn-sm btn-primary rounded py-2 px-4 {{ $chalet->status == 'not available' ? 'disabled' : '' }}"
+                                    href="{{ route('showChalet', $chalet) }}">
+                                    View Details & Booking
+                                </a>
+                            </div>
+                        </div>
+                        @if ($chalet->status == 'not available')
+                            <div class="overlay">
+                                <span class="overlay-text">Not Available</span>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <div class="text-center mt-4">
+            {{-- <a href="{{ route('showingAllChalets') }}" class="btn btn-sm btn-primary rounded py-2 px-4">See All </a> --}}
+        </div>
+    </div>
+</div>
+<hr>
+{{-- end discount --}}
 
 <!-- Team Start -->
 <div class="container-xxl py-5 mb-5">
