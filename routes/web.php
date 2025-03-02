@@ -7,7 +7,7 @@ use App\Http\Controllers\OwnerProfileController;
 use App\Http\Controllers\AdminOwnerController;
 use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\OwnerProfileController;
+
 use App\Http\Controllers\ChaletController;
 
 
