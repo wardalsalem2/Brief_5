@@ -33,13 +33,23 @@ public function index()
     // Get the authenticated user
     $owner = User::where('role', 'owner')->where('id', auth()->id())->first();
 
+    // Check if no owner exists for the authenticated user
     if (!$owner) {
-        return "No Owner user found in the database. Please add a user to test the code.";
+        return "No Owner user found in the database or you are not authorized to access this page.";
     }
+
+    // Retrieve the chalets associated with the authenticated owner
     $chalets = $owner->chalets;
 
+    // Check if the owner has no chalets
+    if ($chalets->isEmpty()) {
+        return "No chalets found for this owner.";
+    }
+
+    // Return view with chalets
     return view('owner.owner', compact('chalets'));
 }
+
 
     /**
     
