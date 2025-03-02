@@ -30,7 +30,8 @@ class OwnerProfileController extends Controller
 // }
 public function index()
 {
-    $owner = User::where('role', 'owner')->first();
+    // Get the authenticated user
+    $owner = User::where('role', 'owner')->where('id', auth()->id())->first();
 
     if (!$owner) {
         return "No Owner user found in the database. Please add a user to test the code.";
