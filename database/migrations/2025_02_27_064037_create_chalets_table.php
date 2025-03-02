@@ -17,18 +17,19 @@ return new class extends Migration {
             $table->text('description');
             $table->decimal('discount', 5, 2)->nullable();
             $table->enum('status', ['available', 'not available']);
-            $table->integer('bedrooms')->default(1); 
-            $table->integer('bathrooms')->default(1); 
-            $table->boolean('wifi')->default(false); 
-            $table->boolean('pool')->default(false); 
-            $table->integer('air_conditioners')->default(0); 
+            $table->integer('bedrooms')->default(1);
+            $table->integer('bathrooms')->default(1);
+            $table->boolean('wifi')->default(false);
+            $table->boolean('pool')->default(false);
+            $table->integer('air_conditioners')->default(0);
             $table->integer('parking_spaces')->default(0);
-            $table->integer('area')->nullable(); 
+            $table->integer('area')->nullable();
             $table->boolean('barbecue')->default(false);
-            $table->enum('view', ['sea', 'mountain', 'city', 'none'])->default('none'); 
-            $table->boolean('kitchen')->default(false); 
-            $table->boolean('kids_play_area')->default(false); 
-            $table->boolean('pets_allowed')->default(false); 
+            $table->enum('view', ['sea', 'mountain', 'city', 'none'])->default('none');
+            $table->boolean('kitchen')->default(false);
+            $table->boolean('kids_play_area')->default(false);
+            $table->boolean('pets_allowed')->default(false);
+            $table->softDeletes(); // إضافة السوفت ديليت
             $table->timestamps();
         });
     }

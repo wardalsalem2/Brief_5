@@ -4,9 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Chalet extends Model
 {
+    use SoftDeletes;
+
+    
     protected $guarded=[];
     use HasFactory;
     public function images()
@@ -25,4 +29,5 @@ class Chalet extends Model
     {
         return $this->belongsTo(User::class, 'owner_id');
     }
+    
 }
