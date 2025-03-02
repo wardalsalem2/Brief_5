@@ -30,17 +30,14 @@ class OwnerProfileController extends Controller
 // }
 public function index()
 {
-    // محاكاة تسجيل الدخول عن طريق جلب أول مالك (Owner) من قاعدة البيانات
     $owner = User::where('role', 'owner')->first();
 
     if (!$owner) {
         return "No Owner user found in the database. Please add a user to test the code.";
     }
-
-    // جلب جميع الشاليهات الخاصة بالمستخدم
     $chalets = $owner->chalets;
 
-    return view('Owner.Owner', compact('chalets'));
+    return view('owner.owner', compact('chalets'));
 }
 
     /**
@@ -48,7 +45,7 @@ public function index()
      */
     public function create()
     {
-        return view('Owner.create'); 
+        return view('owner.create'); 
     }
 
 
@@ -76,9 +73,6 @@ public function index()
             'pets_allowed' => 'sometimes|boolean',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-    
-        // تحقق مما إذا كان المستخدم مسجلاً الدخول
-        // إذا كان null، فهذا يعني أن المستخدم غير مسجل الدخول
     
         $chalet = Chalet::create(array_merge(
             $request->except('images'),

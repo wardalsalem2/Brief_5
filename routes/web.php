@@ -90,3 +90,12 @@ Route::get('/owner/dashbord', [OwnerProfileController::class, 'index'])
 Route::get('/home', [UserController::class, 'showhome'])
     ->middleware('role:user')
     ->name('user.home');
+
+
+    Route::get('/Owner', [OwnerProfileController::class, 'index'])->name('Owner.index');
+Route::get('/Owner/create', [OwnerProfileController::class, 'create'])->name('Owner.create');
+Route::post('/Owner/store', [OwnerProfileController::class, 'store'])->name('Owner.store');
+Route::get('/Owner/edit/{id}', [OwnerProfileController::class, 'edit'])->name('Owner.edit'); // يجب أن تكون GET هنا لعرض نموذج التعديل
+Route::put('/owner/chalets/{id}', [OwnerProfileController::class, 'update'])->name('Owner.update');
+Route::delete('/Owner/{id}', [OwnerProfileController::class, 'destroy'])->name('Owner.destroy'); // يجب أن تكون DELETE هنا لحذف الشاليه
+Route::get('/Owner/chalet/{id}/booking', [OwnerProfileController::class, 'showChaletBooking'])->name('Owner.chalethBooking');
