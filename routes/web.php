@@ -37,3 +37,15 @@ Route::get('/Owner/chalet/{id}/booking', [OwnerProfileController::class, 'showCh
 
     
 
+Route::get('/index', function () {
+    return view('user.index');
+});
+Route::get('/detailse', function () {
+    return view('user.details');
+});
+Route::get('/profaile', function () {
+    return view('user.profaile');
+});
+Route::get('/chalets', function () {
+    return view('user.chalets');
+});
