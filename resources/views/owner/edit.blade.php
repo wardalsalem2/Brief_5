@@ -1,151 +1,59 @@
+<!-- resources/views/yourpage.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Chalet - CHALETS</title>
+    <title>My Properties - CHALETS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #f7941d;
-            --secondary-color: #336699;
-            --dark-color: #2c3e50;
-            --light-color: #f8f9fa;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-
-        .welcome-header {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .welcome-header h1 {
-            font-size: 32px;
-            color: var(--dark-color);
-        }
-
-        .welcome-header span {
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        .form-container {
-            background-color: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 40px;
-        }
-
-        .form-title {
-            color: var(--secondary-color);
-            font-size: 24px;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .form-section {
-            background-color: var(--light-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-
-        .section-title {
-            color: var(--dark-color);
-            font-size: 18px;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: #555;
-        }
-
-        .form-control {
-            border-radius: 6px;
-            border: 1px solid #ddd;
-            padding: 10px 15px;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(247, 148, 29, 0.25);
-        }
-
         .submit-btn {
-            background-color: var(--primary-color);
+            background-color: #007bff;
             color: white;
             border: none;
-            padding: 12px 30px;
-            font-weight: 600;
-            border-radius: 6px;
+            padding: 10px 20px;
             font-size: 16px;
-            transition: all 0.3s;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-
+    
         .submit-btn:hover {
-            background-color: #e6850c;
-            transform: translateY(-2px);
+            background-color: #0056b3;
         }
-
-        .back-btn {
-            background-color: var(--dark-color);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-weight: 600;
-            border-radius: 6px;
-            font-size: 16px;
-            transition: all 0.3s;
+    
+        .submit-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
         }
-
-        .back-btn:hover {
-            background-color: #1a2530;
-        }
-
-        .image-upload-container {
-            border: 2px dashed #ccc;
-            padding: 20px;
-            text-align: center;
-            border-radius: 6px;
-            background-color: #f9f9f9;
-            transition: all 0.3s;
-        }
-
-        .image-upload-container:hover {
-            border-color: var(--primary-color);
-        }
-
-        .preview-image {
-            max-width: 100%;
-            height: auto;
-            margin-top: 15px;
-            border-radius: 6px;
-        }
-    </style>
+        </style>
 </head>
 <body>
-    <div class="container mt-4 mb-5">
-        <div class="welcome-header">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a class="navbar-brand" href="#">CHALETS</a>
+        </div>
+    </nav>
+
+    <!-- Include Sidebar -->
+    @include('owner.sidebar')  <!-- Include Sidebar here -->
+
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
+      
+    <div class="container mt-5">
+        <div class="welcome-header mt-5">
             <h1>Edit Chalet - <span>CHALETS</span></h1>
         </div>
 
         <div class="form-container">
-            <h2 class="form-title">Edit Chalet</h2>
-
+        
             <!-- Error Messages -->
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -160,7 +68,7 @@
             <form method="POST" action="{{ route('Owner.update', $chalet->id) }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
-    <!-- بقية الفورم -->
+   
 
                 <!-- Basic Information Section -->
                 <div class="form-section">
@@ -281,17 +189,30 @@
                     </div>
                 </div>
 
-
-
-                <!-- Submit Button -->
-                <div class="text-center mt-4">
-                    <button type="submit" class="submit-btn">Save Changes</button>
-                    <a href="{{ route('Owner.index') }}" class="back-btn ml-3">Back to List</a>
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="submit-btn" style="background-color: orange; border-color: orange; color: white;">Save Changes</button>
                 </div>
+
             </form>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</div>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+        sidebar.classList.toggle('active');
+        if (sidebar.classList.contains('active')) {
+            mainContent.style.marginLeft = '250px';
+        } else {
+            mainContent.style.marginLeft = '0';
+        }
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

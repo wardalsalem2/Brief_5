@@ -107,7 +107,7 @@ public function index()
     
     public function show($id)
     {
-        $chalet = Chalet::where('owner_id', auth()->id())->findOrFail($id); // التأكد أن العقار يخص المستخدم
+        $chalet = Chalet::find($id); // التأكد أن العقار يخص المستخدم
         return view('owner.show', compact('chalet'));
     }
 
@@ -209,7 +209,7 @@ public function showChaletBooking($chalet_id)
 {
     $chalet = Chalet::with('users')->findOrFail($chalet_id);
 
-    return view('Owner.chalet_booking', compact('chalet'));
+    return view('Owner.owner', compact('chalet'));
 }
 
 }  
