@@ -4,11 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration {
+
     public function up(): void
     {
         Schema::create('chalets', function (Blueprint $table) {
@@ -20,16 +17,23 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('discount', 5, 2)->nullable();
             $table->enum('status', ['available', 'not available']);
-            $table->date('available_start')->nullable();
-            $table->date('available_end')->nullable();
+            $table->integer('bedrooms')->default(1);
+            $table->integer('bathrooms')->default(1);
+            $table->boolean('wifi')->default(false);
+            $table->boolean('pool')->default(false);
+            $table->integer('air_conditioners')->default(0);
+            $table->integer('parking_spaces')->default(0);
+            $table->integer('area')->nullable();
+            $table->boolean('barbecue')->default(false);
+            $table->enum('view', ['sea', 'mountain', 'city', 'none'])->default('none');
+            $table->boolean('kitchen')->default(false);
+            $table->boolean('kids_play_area')->default(false);
+            $table->boolean('pets_allowed')->default(false);
+            $table->softDeletes(); // إضافة السوفت ديليت
             $table->timestamps();
-
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('chalets');

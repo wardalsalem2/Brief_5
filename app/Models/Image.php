@@ -11,7 +11,8 @@ class Image extends Model
     use HasFactory;
     public function chalet()
  { 
-return $this->belongsTo(Chalet::class);
+      return $this->belongsTo(Chalet::class);
  } 
+
 
 }
