@@ -1,7 +1,21 @@
 <link href="{{ asset('login&reg.css') }}" rel="stylesheet">
+<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+<style>
+    nav{
+        background: #0F172B  ;
+        padding: 25px;
+    }
 
-<div class="cont">
-    <div class="form sign-in" >
+
+
+</style>
+
+<nav>
+    <h1 style="color: #FEA116; font-size: xx-large; margin-left: 25px;">CHALET</h1>
+</nav>
+
+<div class="cont ">
+    <div class="form sign-in mt-5" >
         <h2>Welcome</h2>
         @if (session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
@@ -11,7 +25,7 @@
             <label>
                 <span>Email</span>
                 <input type="email" name="email" required />
-            </label> 
+            </label>
             <label>
                 <span>Password</span>
                 <input type="password" name="password" required />
@@ -55,7 +69,7 @@
                     <span>Confirm Password</span>
                     <input type="password" name="password_confirmation" required />
                 </label>
-                
+
                 <button type="submit" class="submit">Sign Up</button>
             </form>
         </div>
