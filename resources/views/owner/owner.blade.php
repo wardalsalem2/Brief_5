@@ -55,7 +55,7 @@
                 <div class="chalet-card">
                     <div class="position-relative">
                         @if ($chalet->images && $chalet->images->isNotEmpty())
-                            <img src="{{ asset('storage/' . optional($chalet->images->first())->image) }}" alt="{{ $chalet->name }}" class="chalet-image">
+                            <img src="{{ asset($chalet->images->first()->image ?? 'img/default.jpg') }}" alt="{{ $chalet->name }}" class="chalet-image">
                         @else
                             <img src="https://via.placeholder.com/400x220" alt="No Image" class="chalet-image">
                         @endif

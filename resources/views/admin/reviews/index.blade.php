@@ -5,7 +5,7 @@
 <body>
     <div class="container mt-4">
         <h2 class="mb-4">Manage Reviews & Comments</h2>
-        
+
         <!-- Search & Filter Form -->
         <form method="GET" action="{{ route('admin.reviews.index') }}" class="mb-4">
             <div class="row">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </form>
-        
+
         <!-- Reviews Table -->
         <table class="table table-bordered">
             <thead>
@@ -72,8 +72,9 @@
                 @endforeach
             </tbody>
         </table>
-        
-        {{ $reviews->links() }}
+
+        {{ $reviews->links('pagination::bootstrap-5') }}
+
     </div>
 </body>
 </html>
