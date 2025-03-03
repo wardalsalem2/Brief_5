@@ -209,7 +209,7 @@ public function showChaletBooking($chalet_id)
 {
     $chalet = Chalet::with('users')->findOrFail($chalet_id);
 
-    return view('Owner.chalet_booking', compact('chalet'));
+    return view('Owner.owner', compact('chalet'));
 }
 
 }  
