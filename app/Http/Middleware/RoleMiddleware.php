@@ -12,7 +12,7 @@ class RoleMiddleware
     {
         
         if (!Auth::check()) {
-            return redirect('/login')->with('error', 'You must be logged in.');
+            return redirect()->route('login')->with('error', 'You must be logged in.');
         }
 
         if (Auth::user()->role !== $role) {
