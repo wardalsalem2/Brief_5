@@ -7,6 +7,13 @@ use App\Http\Controllers\OwnerProfileController;
 use App\Http\Controllers\AdminOwnerController;
 use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserController as AdminUserController; 
+use App\Http\Controllers\Admin\ChaletController as AdminChaletController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;  
+use App\Http\Controllers\Admin\BookingController as AdminBookingController;
+use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
+use App\Http\Controllers\Admin\ReportsController as AdminReportsController;
+
 
 use App\Http\Controllers\ChaletController;
 
@@ -80,9 +87,9 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-Route::get('/admin/dashbord', [AdminOwnerController::class, 'index'])
+Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])
     ->middleware('role:admin')
-    ->name('admin.dashbord');
+    ->name('admin.dashboard');
 
 
 
@@ -93,7 +100,6 @@ Route::get('/home', [UserController::class, 'showhome'])
 
     Route::middleware(['role:owner'])
         ->group(function () {
-           
             Route::get('/owner/dashboard', [OwnerProfileController::class, 'index'])->name('Owner.dashboard');
             Route::get('/Owner', [OwnerProfileController::class, 'index'])->name('Owner.index');
             Route::get('/Owner/create', [OwnerProfileController::class, 'create'])->name('Owner.create');
@@ -104,3 +110,40 @@ Route::get('/home', [UserController::class, 'showhome'])
             Route::get('/Owner/chalet/{id}/booking', [OwnerProfileController::class, 'showChaletBooking'])->name('Owner.chaletBooking');
         });
     
+//hamzeh&omayma
+use App\Http\Controllers\Admin\DashboardController;
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/users', [AdminChaletController::class, 'index'])->name('admin.users.index');
+    Route::put('/users/{id}', [AdminUserController::class, 'update'])->name('admin.users.update');
+    Route::get('/users/index', [AdminUserController::class, 'index'])->name('admin.users.index');
+    Route::get('/users/create', [AdminUserController::class, 'create'])->name('admin.users.create');
+    Route::post('/users/store', [AdminUserController::class, 'store'])->name('admin.users.store');
+    Route::get('/users/{id}', [AdminUserController::class, 'show'])->name('admin.users.show');
+    Route::get('/users/index', [AdminUserController::class, 'index'])->name('admin.users.index');
+
+    Route::get('/users/{id}/edit', [AdminUserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/users/{id}', [AdminUserController::class, 'update'])->name('admin.users.edit');
+    Route::delete('/users/{id}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
+    Route::post('/users/{id}/toggle-status', [AdminUserController::class, 'toggleStatus'])->name('admin.users.toggleStatus');
+
+    Route::get('/reports', [AdminReportsController::class, 'index'])->name('admin.reports.index');
+
+    Route::get('/bookings', [AdminBookingController::class, 'index'])->name('admin.bookings.index');
+    Route::get('/bookings/{booking}/edit', [AdminBookingController::class, 'edit'])->name('admin.bookings.edit');
+    Route::patch('/bookings/{booking}/status', [AdminBookingController::class, 'updateStatus'])->name('admin.bookings.updateStatus');
+    Route::delete('/bookings/{booking}', [AdminBookingController::class, 'destroy'])->name('admin.bookings.destroy');
+
+    Route::get('/reviews', [AdminReviewController::class, 'index'])->name('admin.reviews.index');
+    Route::delete('/reviews/{id}', [AdminReviewController::class, 'destroy'])->name('admin.reviews.destroy');
+
+    Route::get('/chalets', [AdminChaletController::class, 'index'])->name('admin.chalets.index');
+    Route::get('/chalets/{id}/edit', [AdminChaletController::class, 'edit'])->name('admin.chalets.edit');
+    Route::put('/chalets/{id}', [AdminChaletController::class, 'update'])->name('admin.chalets.update');
+    Route::post('/chalets/{id}/toggle-status', [AdminChaletController::class, 'toggleStatus'])->name('admin.chalets.toggleStatus');
+    Route::delete('/chalets/{id}', [AdminChaletController::class, 'destroy'])->name('admin.chalets.destroy');
+    Route::get('chalets/{chalet}/approve', [AdminChaletController::class, 'approve'])->name('chalets.approve');
+    Route::get('chalets/{chalet}/deactivate', [AdminChaletController::class, 'deactivate'])->name('chalets.deactivate');
+});
