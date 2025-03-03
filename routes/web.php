@@ -110,7 +110,6 @@ Route::get('/home', [UserController::class, 'showhome'])
             Route::get('/owner/chalets{id}', [OwnerProfileController::class, 'show'])->name('Owner.show');
             Route::get('/Owner/chalet/{id}/booking', [OwnerProfileController::class, 'showChaletBooking'])->name('Owner.chaletBooking');
         });
-<<<<<<< HEAD
     
 //hamzeh&omayma
 use App\Http\Controllers\Admin\DashboardController;
@@ -149,7 +148,5 @@ Route::prefix('admin')->group(function () {
     Route::get('chalets/{chalet}/approve', [AdminChaletController::class, 'approve'])->name('chalets.approve');
     Route::get('chalets/{chalet}/deactivate', [AdminChaletController::class, 'deactivate'])->name('chalets.deactivate');
 });
-=======
 
     
->>>>>>> 664cdb8e9a2e021cba61def2d0cde83b375fc5a6
