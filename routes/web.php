@@ -101,6 +101,8 @@ Route::get('/home', [UserController::class, 'showhome'])
             Route::get('/Owner/edit/{id}', [OwnerProfileController::class, 'edit'])->name('Owner.edit');
             Route::put('/owner/chalets/{id}', [OwnerProfileController::class, 'update'])->name('Owner.update');
             Route::delete('/Owner/{id}', [OwnerProfileController::class, 'destroy'])->name('Owner.destroy');
+            Route::get('/owner/chalets{id}', [OwnerProfileController::class, 'show'])->name('Owner.show');
             Route::get('/Owner/chalet/{id}/booking', [OwnerProfileController::class, 'showChaletBooking'])->name('Owner.chaletBooking');
         });
+
     

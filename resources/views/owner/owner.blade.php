@@ -181,6 +181,7 @@
     </style>
 </head>
 <body>
+
     <div class="container mt-4">
         <div class="welcome-header">
             <h1>Welcome to Your <span>CHALETS</span></h1>
@@ -219,17 +220,22 @@
                         </p>
                         
                         <div class="d-flex justify-content-between">
+                        <a href="{{ route('Owner.show', $chalet->id) }}" class="btn btn">VIEW</a>
+
                             <a href="{{ route('Owner.edit', $chalet->id) }}" class="btn btn-view btn-action">EDIT</a>
+                         
+
                             <form action="{{ route('Owner.destroy', $chalet->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-action btn">DELETE</button>
+
                             </form>
                         </div>
 
                         <!-- Improved Bookings Display -->
                         <div class="bookings-container">
-                            <h6 class="bookings-title">Bookings Information</h6>
+                           
                             @if ($chalet->bookings->count() > 0)
                                 @foreach ($chalet->bookings as $booking)
                                     <div class="booking-item">
@@ -261,5 +267,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   
 </body>
 </html>

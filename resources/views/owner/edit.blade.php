@@ -138,6 +138,7 @@
     </style>
 </head>
 <body>
+@include('component.header')
     <div class="container mt-4 mb-5">
         <div class="welcome-header">
             <h1>Edit Chalet - <span>CHALETS</span></h1>
@@ -160,7 +161,7 @@
             <form method="POST" action="{{ route('Owner.update', $chalet->id) }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
-    <!-- بقية الفورم -->
+   
 
                 <!-- Basic Information Section -->
                 <div class="form-section">
