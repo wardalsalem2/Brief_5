@@ -19,7 +19,7 @@ class ReviewSeeder extends Seeder
                 Review::create([
                     'user_id' => $users->random(),
                     'chalet_id' => $chaletId,
-                    'comment' => "This is a sample review for chalet ID $chaletId.",
+                    'comment' => "This is a sample review for chalet ID .",
                     'rate' => rand(1, 5),
                 ]);
             }
