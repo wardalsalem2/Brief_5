@@ -75,7 +75,10 @@
                             <form action="{{ route('Owner.destroy', $chalet->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-action" aria-label="Delete Chalet">DELETE</button>
+                                <button type="submit" class="btn btn-action" aria-label="Delete Chalet" style="background-color: orange; border-color: orange; color: white;">
+                                  DELETE
+                                  </button>
+
                             </form>
                         </div>
                         <div class="bookings-container">
