@@ -107,7 +107,7 @@ public function index()
     
     public function show($id)
     {
-        $chalet = Chalet::where('owner_id', auth()->id())->findOrFail($id); // التأكد أن العقار يخص المستخدم
+        $chalet = Chalet::find($id); // التأكد أن العقار يخص المستخدم
         return view('owner.show', compact('chalet'));
     }
 
