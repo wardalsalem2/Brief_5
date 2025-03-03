@@ -86,7 +86,7 @@ Route::get('/admin/dashbord', [AdminOwnerController::class, 'index'])
 
 
 
-Route::get('/home', [UserController::class, 'showhome'])
+Route::get('/home', [UserController::class, 'showhome'])    
     ->middleware('role:user')
     ->name('user.home');
 
