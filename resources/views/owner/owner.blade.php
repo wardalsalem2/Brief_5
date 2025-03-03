@@ -199,11 +199,11 @@
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="chalet-card">
                     <div class="position-relative">
-                        @if ($chalet->images->isNotEmpty())
-                            <img src="{{ asset('storage/' . $chalet->images->first()->image) }}" alt="{{ $chalet->name }}" class="chalet-image">
-                        @else
-                            <img src="{{ asset('images/no-image.png') }}" alt="No Image" class="chalet-image">
-                        @endif
+                        @if ($chalet->images && $chalet->images->isNotEmpty())
+                        <img src="{{ asset('storage/' . optional($chalet->images->first())->image) }}" alt="{{ $chalet->name }}" class="chalet-image">
+                    @else
+                        <img src="{{ asset('images/no-image.png') }}" alt="No Image" class="chalet-image">
+                    @endif
                         <div class="price-tag">${{ $chalet->price_per_day }}/day</div>
                         
                         <!-- Status Tag -->
