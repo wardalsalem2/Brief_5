@@ -37,4 +37,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(Chalet::class, 'owner_id');
     }
+    
+public function index()
+{
+    $totalUsers = User::count();
+
+    return view('your-view-name', compact('totalUsers'));
+
+          // Get the total number of users and owners (excluding admins)
+    // $totalUsersAndOwners = User::whereIn('role', ['user', 'owner'])->count();
+
+    // Pass the data to the view
+    // return view('your-view-name', compact('totalUsersAndOwners'));
+}
 }

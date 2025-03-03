@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container-fluid">
-    <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Manage Users (Renters & Lessors)</h1>
         <a href="{{ route('admin.users.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
@@ -53,7 +52,7 @@
                             @if($user->role == 'user')
                             <span class="badge bg-dark text-white">user</span>
                             @elseif($user->role == 'owner')
-                             <span class="badge bg-dark text-white">owner</span>
+                            <span class="badge bg-dark text-white">owner</span>
                             @elseif($user->role == 'admin')
                             <span class="badge bg-dark text-white">Admin</span>
                             @endif
