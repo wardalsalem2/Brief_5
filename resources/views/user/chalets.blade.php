@@ -148,7 +148,7 @@
                                     {{ $chalet->pets_allowed ? 'Yes' : 'No' }}
                                 </li>
                             </ul>
-                            
+
 
                             <div class="d-flex justify-content-between">
                                 <a class="btn btn-sm btn-primary rounded py-2 px-4 {{ $chalet->status == 'not available' ? 'disabled' : '' }}" href="{{ route('showChalet', $chalet) }}">

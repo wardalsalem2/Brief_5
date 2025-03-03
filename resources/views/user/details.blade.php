@@ -2,30 +2,30 @@
 
 <?php
 // تعريف المتغيرات لاختبار الصفحة بدون الحاجة لجلب البيانات من قاعدة البيانات
-$chalet = (object) [
-    'name' => 'Luxury Beach Chalet',
-    'price' => 150,
-    'status' => 'Available',
-    'area' => '500', // بالقدم المربع
-    'rooms' => '3 Bedrooms, 1 Living Room',
-    'bathrooms' => '2',
-    'images' => [
-        (object) ['url' => 'https://via.placeholder.com/800x400'],
-        (object) ['url' => 'https://via.placeholder.com/800x400'],
-    ],
-    'comments' => [
-        (object) [
-            'user' => (object) ['name' => 'John Doe'],
-            'rating' => 4,
-            'content' => 'Amazing place! Highly recommended.',
-        ],
-        (object) [
-            'user' => (object) ['name' => 'Jane Smith'],
-            'rating' => 5,
-            'content' => 'Had a fantastic experience staying here.',
-        ],
-    ]
-];
+// $chalet = (object) [
+//     'name' => 'Luxury Beach Chalet',
+//     'price' => 150,
+//     'status' => 'Available',
+//     'area' => '500', // بالقدم المربع
+//     'rooms' => '3 Bedrooms, 1 Living Room',
+//     'bathrooms' => '2',
+//     'images' => [
+//         (object) ['url' => 'https://via.placeholder.com/800x400'],
+//         (object) ['url' => 'https://via.placeholder.com/800x400'],
+//     ],
+//     'comments' => [
+//         (object) [
+//             'user' => (object) ['name' => 'John Doe'],
+//             'rating' => 4,
+//             'content' => 'Amazing place! Highly recommended.',
+//         ],
+//         (object) [
+//             'user' => (object) ['name' => 'Jane Smith'],
+//             'rating' => 5,
+//             'content' => 'Had a fantastic experience staying here.',
+//         ],
+//     ]
+// ];
 ?>
 <style>
     #BookingForm {
@@ -42,7 +42,7 @@ $chalet = (object) [
             <div class="col-lg-8">
                 <div class="row g-4 align-items-center">
                     <!-- Slider for Property Images -->
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                    {{-- <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                         <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 @foreach($chalet->images as $key => $image)
@@ -58,22 +58,22 @@ $chalet = (object) [
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             </a>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <!-- Property Details -->
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.3s">
                         <h1 class="mb-4">{{ $chalet->name }}</h1>
                         <p><strong>Price/day: </strong> ${{ $chalet->price }}</p>
                         <p><strong>Status: </strong> Available</p>
-                        <p><strong>Address: </strong> {{ $chalet->area }} sq. ft.</p>
-                        <p><strong>Description: </strong> {{ $chalet->rooms }} rooms</p>
-                        <p><strong>Discount: </strong> {{ $chalet->bathrooms }}%</p>
+                        <p><strong>Address: </strong> {{ $chalet->address }} sq. ft.</p>
+                        <p><strong>Description: </strong> {{ $chalet->description }} rooms</p>
+                        <p><strong>Discount: </strong> {{ $chalet->discount }}%</p>
                     </div>
                 </div>
             </div>
 
             <!-- Right Side: Booking Section -->
-            <div class="col-lg-4">
+            {{-- <div class="col-lg-4">
                 <div class="bg-white shadow p-4 rounded">
                     <h4 class="mb-3">Book Your Stay</h4>
                     <div class="row g-3">
@@ -106,7 +106,7 @@ $chalet = (object) [
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>
@@ -141,12 +141,12 @@ $chalet = (object) [
     </form>
 
     <!-- Display Comments -->
-    <div class="comments-list mt-5">
+    {{-- <div class="comments-list mt-5">
         <h4>All Comments</h4>
 
         <!-- Container for comments with scroll -->
         <div style="max-height: 300px; overflow-y: auto;">
-            @foreach($chalet->comments as $index => $comment)
+            @foreach($chalet->reviews as $index => $comment)
                 <div class="comment-item mb-4" style="{{ $index >= 4 ? 'display: block;' : '' }}">
                     <!-- Display all comments but limit scroll -->
                     <strong>{{ $comment->user->name }}</strong>
@@ -159,13 +159,13 @@ $chalet = (object) [
                 </div>
             @endforeach
         </div>
-    </div>
+    </div> --}}
 
 
 
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/wow/wow.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
@@ -174,9 +174,9 @@ $chalet = (object) [
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script> --}}
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    {{-- <script src="js/main.js"></script> --}}
     </body>
 
     </html>

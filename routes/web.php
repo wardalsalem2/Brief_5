@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminOwnerController;
 use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 
+
 use App\Http\Controllers\ChaletController;
 
 
@@ -54,7 +55,7 @@ Route::resource('profile_user', UserController::class)->only(['index', 'update']
 Route::delete('profile_user/cancelBooking/{id}', [UserController::class, 'cancelBooking'])
     ->name('profile_user.cancelBooking');
 
-Route::post('/add-comment', [StoreController::class, 'addComment'])->name('add.comment');   //for user pages 
+Route::post('/add-comment', [StoreController::class, 'addComment'])->name('add.comment');   //for user pages
 Route::get('/chalets', [StoreController::class, 'showingAllChalets'])->name('showingAllChalets');
 Route::get('/chalets/{chalet}', [StoreController::class, 'showDetails'])->name('showChalet');
 Route::get('/contact', [StoreController::class, 'contact'])->name('contact');
@@ -70,11 +71,11 @@ Route::get('/chalets/{chaletId}', [StoreController::class, 'showChalet'])->name(
 // raghad //
 
 Route::get('/', function () {
-    return view('auth.login_reg'); 
+    return view('auth.login_reg');
 })->name('login');
 Route::get('/register', function () {
     return view('auth.login_reg');
-})->name('register');  
+})->name('register');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -93,7 +94,7 @@ Route::get('/home', [UserController::class, 'showhome'])
 
     Route::middleware(['role:owner'])
         ->group(function () {
-           
+
             Route::get('/owner/dashboard', [OwnerProfileController::class, 'index'])->name('Owner.dashboard');
             Route::get('/Owner', [OwnerProfileController::class, 'index'])->name('Owner.index');
             Route::get('/Owner/create', [OwnerProfileController::class, 'create'])->name('Owner.create');
@@ -103,4 +104,4 @@ Route::get('/home', [UserController::class, 'showhome'])
             Route::delete('/Owner/{id}', [OwnerProfileController::class, 'destroy'])->name('Owner.destroy');
             Route::get('/Owner/chalet/{id}/booking', [OwnerProfileController::class, 'showChaletBooking'])->name('Owner.chaletBooking');
         });
-    
+

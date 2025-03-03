@@ -37,7 +37,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #FF7F00; 
+    color: #FF7F00;
 }
 
 .features-list i {
@@ -192,7 +192,7 @@
                         <span><strong>Pool</strong></span>
                         <span class="mt-1">{{ $chalet->pool ? 'Yes' : 'No' }}</span>
                     </li>
-            
+
                     <li class="d-flex flex-column align-items-center mb-4" style="flex: 0 0 23%; text-align: center;">
                         <i class="fa fa-car text-primary mb-2" style="font-size: 2rem;"></i>
                         <span><strong>Parking Spaces</strong></span>
@@ -213,7 +213,7 @@
                         <span><strong>Air Conditioning</strong></span>
                         <span class="mt-1">{{ $chalet->air_conditioning ? 'Yes' : 'No' }}</span>
                     </li>
-            
+
                     <li class="d-flex flex-column align-items-center mb-4" style="flex: 0 0 23%; text-align: center;">
                         <i class="fa {{ $chalet->heating ? 'fa-thermometer-half' : 'fa-times-circle' }} text-primary mb-2" style="font-size: 2rem;"></i>
                         <span><strong>Heating</strong></span>
@@ -226,8 +226,8 @@
                     </li>
                 </ul>
             </div>
-            
-            
+
+
             <hr class="my-4">
 <!------------------------------------------------ End  Property Features Section ------------------------------------------------>
 <!-------------------------------------------------- Right Side: Booking Section ------------------------------------------------->
@@ -328,5 +328,5 @@
         console.log(bookedDates);
     });
 </script>
-</div>  
+</div>
 @include('component.footer')

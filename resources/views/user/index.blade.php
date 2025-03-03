@@ -69,7 +69,8 @@
                         <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxurious luxury
                         </h6>
                         <h1 class="display-3 text-white mb-4 animated slideInDown">Discover Luxurious chalets</h1>
-                        <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our chalets</a>
+                        <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our
+                            chalets</a>
                     </div>
                 </div>
             </div>
@@ -416,9 +417,12 @@
                     <div class="position-relative">
                         <img class="img-fluid" src="img/team-1.jpg" alt="">
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href=""><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href=""><i
+                                    class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href=""><i
+                                    class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
@@ -432,9 +436,12 @@
                     <div class="position-relative">
                         <img class="img-fluid" src="img/team-2.jpg" alt="">
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href=""><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href=""><i
+                                    class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href=""><i
+                                    class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
@@ -448,9 +455,12 @@
                     <div class="position-relative">
                         <img class="img-fluid" src="img/team-3.jpg" alt="">
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href=""><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href=""><i
+                                    class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href=""><i
+                                    class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
@@ -464,9 +474,12 @@
                     <div class="position-relative">
                         <img class="img-fluid" src="img/team-4.jpg" alt="">
                         <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href=""><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href=""><i
+                                    class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square btn-primary mx-1" href=""><i
+                                    class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="text-center p-4 mt-3">
@@ -483,3 +496,53 @@
 
 @include('component.footer')
 <!-- Footer Start -->
+
+<style>
+    .fixed-img-size {
+        width: 100%;
+        height: 350px;
+    }
+
+    .fixed-height {
+        height: 350px;
+
+    }
+
+    .card-fixed-height {
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-body {
+        flex: 1;
+        overflow: hidden;
+    }
+
+    .disabled-card {
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    .disabled {
+        pointer-events: none;
+        background-color: gray !important;
+        border-color: gray !important;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+</style>
