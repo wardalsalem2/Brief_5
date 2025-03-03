@@ -138,6 +138,7 @@
     </style>
 </head>
 <body>
+@include('component.header')
     <div class="container mt-4 mb-5">
         <div class="welcome-header">
             <h1>Welcome to Our <span>CHALETS</span></h1>
