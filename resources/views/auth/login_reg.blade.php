@@ -1,10 +1,4 @@
 <link href="{{ asset('login&reg.css') }}" rel="stylesheet">
-
-
-<!-- filepath: /c:/xampp/htdocs/prief_laravel/resources/views/auth/login_reg.blade.php -->
-<div class="cont">
-    {{-- فورم تسجيل الدخول --}}
-    <div class="form sign-in">
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 <style>
     nav{
@@ -26,20 +20,12 @@
         @if (session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
-<<<<<<< HEAD
-        <form method="POST" action="{{ route('login') }}">
-=======
         <form method="POST" action="/login">
->>>>>>> 1ebd400ede06fe66cd1bcf388068cea07ee2efb3
             @csrf
             <label>
                 <span>Email</span>
                 <input type="email" name="email" required />
-<<<<<<< HEAD
-            </label> 
-=======
             </label>
->>>>>>> 1ebd400ede06fe66cd1bcf388068cea07ee2efb3
             <label>
                 <span>Password</span>
                 <input type="password" name="password" required />
@@ -62,17 +48,10 @@
             </div>
         </div>
 
-<<<<<<< HEAD
-        {{-- فورم تسجيل الحساب --}}
-        <div class="form sign-up">
-            <h2>Create your Account</h2>
-            <form method="POST" action="{{ route('register') }}">
-=======
 
         <div class="form sign-up">
             <h2>Create your Account</h2>
             <form method="POST" action="/register">
->>>>>>> 1ebd400ede06fe66cd1bcf388068cea07ee2efb3
                 @csrf
                 <label>
                     <span>Name</span>
@@ -90,11 +69,7 @@
                     <span>Confirm Password</span>
                     <input type="password" name="password_confirmation" required />
                 </label>
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> 1ebd400ede06fe66cd1bcf388068cea07ee2efb3
                 <button type="submit" class="submit">Sign Up</button>
             </form>
         </div>
