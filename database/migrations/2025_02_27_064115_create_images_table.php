@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('chalet_id')->constrained('chalets')->onDelete('cascade');
             $table->string('image');
             $table->timestamps();
-
         });
     }
 
