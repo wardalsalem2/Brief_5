@@ -145,10 +145,15 @@ Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])
     ->name('admin.dashboard');
 
 
-
-Route::get('/home', [UserController::class, 'showhome'])    
+    Route::get('/home', [UserController::class, 'showhome'])    
     ->middleware('role:user')
     ->name('user.home');
+
+// Routes for specific sections on the home page
+Route::get('/home#about', [UserController::class, 'showAbout'])->name('home.about');
+Route::get('/home#Service', [UserController::class, 'showServices'])->name('home.services');
+Route::get('/home#discounted-chalets', [UserController::class, 'showDiscountedChalets'])->name('home.discountedChalets');
+Route::get('/home#chalets', [UserController::class, 'showChalets'])->name('home.chalets');
 
 
     Route::middleware(['role:owner'])

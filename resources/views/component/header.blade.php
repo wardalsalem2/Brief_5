@@ -59,11 +59,11 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="/home" class="nav-item nav-link">Home</a>
-                                <a href="home#about" class="nav-item nav-link">About</a>
-                                <a href="home#Service" class="nav-item nav-link">Services</a>
-                                <a href="home#discounted-chalets" class="nav-item nav-link">discount</a>
-                                <a href="home#chalets" class="nav-item nav-link">Chalets</a>
+                                <a href="{{ route('user.home') }}" class="nav-item nav-link">Home</a>
+                                <a href="{{ route('home.about') }}" class="nav-item nav-link">About</a>
+                                <a href="{{ route('home.services') }}" class="nav-item nav-link">Services</a>
+                                <a href="{{ route('home.discountedChalets') }}" class="nav-item nav-link">Discount</a>
+                                <a href="{{ route('home.chalets') }}" class="nav-item nav-link">Chalets</a>
                                 <a href="{{route('contact')}}" class="nav-item nav-link">Contact</a>
                             </div>
                             {{-- for login & reg % icon --}}

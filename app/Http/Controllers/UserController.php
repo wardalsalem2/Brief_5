@@ -14,21 +14,45 @@ class UserController extends Controller
 
     public function showhome()
     {
-        $chalets = Chalet::with(['images', 'reviews'])                  // on home bage & random chalete
+        $chalets = Chalet::with(['images', 'reviews'])  // on home page & random chalets
             ->withAvg('reviews', 'rate')
             ->inRandomOrder()
             ->limit(3)
             ->get();
-
-        $discountedChalets = Chalet::with(['images', 'reviews'])        // for discount in home page
+    
+        $discountedChalets = Chalet::with(['images', 'reviews'])  // for discount in home page
             ->withAvg('reviews', 'rate')
             ->where('discount', '>', 0)
             ->inRandomOrder()
             ->limit(3)
             ->get();
-
+    
         return view('user.index', compact('chalets', 'discountedChalets'));
     }
+    
+    public function showAbout()
+    {
+        return view('user.index'); // Return the same home page, but scroll to 'about' section
+    }
+    
+    public function showServices()
+    {
+        return view('user.index'); // Return the same home page, but scroll to 'services' section
+    }
+    
+    public function showDiscountedChalets()
+    {
+        return view('user.index'); // Return the same home page, but scroll to 'discounted chalets' section
+    }
+    
+    public function showChalets()
+    {
+        return view('user.index'); // Return the same home page, but scroll to 'chalets' section
+    }
+    
+    
+
+ 
     //---------------------------------------------------------------------------------------------
     public function index()
     {
