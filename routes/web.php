@@ -8,9 +8,9 @@ use App\Http\Controllers\AdminOwnerController;
 use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
-use App\Http\Controllers\Admin\UserController as AdminUserController; 
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ChaletController as AdminChaletController;
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;  
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\ReportsController as AdminReportsController;
@@ -36,13 +36,13 @@ use App\Http\Controllers\ChaletController;
 
 // صفحة الـ login
 Route::get('/', function () {
-    return view('auth.login_reg'); 
+    return view('auth.login_reg');
 })->name('login');
 
 // صفحة التسجيل
 Route::get('/register', function () {
     return view('auth.login_reg');
-})->name('register');  
+})->name('register');
 
 // الـ POST الخاص بتسجيل الدخول
 Route::post('/login', [CustomAuthController::class, 'login']);
@@ -58,10 +58,7 @@ Route::get('/contact', function () {
     return view('component.contact');
 })->name('contact');
 
-// صفحات الـ Admin
-Route::get('/admin/dashbord', [AdminOwnerController::class, 'index'])
-    ->middleware('role:admin')
-    ->name('admin.dashbord');
+// صفحات الـ 
 
 // صفحات الـ Owner
 Route::get('/owner/dashbord', [OwnerProfileController::class, 'index'])
@@ -84,7 +81,7 @@ Route::get('/profaile', function () {
     return view('user.profaile');
 });
 Route::get('/chalets', function () {
-    return view('user.chalets');}  
+    return view('user.chalets');}
 );
 // Route::get('/', function () {
 //     return view('auth.login&reg');
@@ -114,7 +111,7 @@ Route::resource('profile_user', UserController::class)->only(['index', 'update']
 Route::delete('profile_user/cancelBooking/{id}', [UserController::class, 'cancelBooking'])
     ->name('profile_user.cancelBooking');
 
-Route::post('/add-comment', [StoreController::class, 'addComment'])->name('add.comment');   //for user pages 
+Route::post('/add-comment', [StoreController::class, 'addComment'])->name('add.comment');   //for user pages
 Route::get('/chalets', [StoreController::class, 'showingAllChalets'])->name('showingAllChalets');
 Route::get('/chalets/{chalet}', [StoreController::class, 'showDetails'])->name('showChalet');
 Route::get('/contact', [StoreController::class, 'contact'])->name('contact');
@@ -130,11 +127,11 @@ Route::get('/chalets/{chaletId}', [StoreController::class, 'showChalet'])->name(
 // raghad //
 
 Route::get('/', function () {
-    return view('auth.login_reg'); 
+    return view('auth.login_reg');
 })->name('login');
 Route::get('/register', function () {
     return view('auth.login_reg');
-})->name('register');  
+})->name('register');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -145,7 +142,7 @@ Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])
     ->name('admin.dashboard');
 
 
-    Route::get('/home', [UserController::class, 'showhome'])    
+    Route::get('/home', [UserController::class, 'showhome'])
     ->middleware('role:user')
     ->name('user.home');
 
@@ -168,7 +165,7 @@ Route::get('/home#chalets', [UserController::class, 'showChalets'])->name('home.
             Route::get('/owner/chalets{id}', [OwnerProfileController::class, 'show'])->name('Owner.show');
             Route::get('/Owner/chalet/{id}/booking', [OwnerProfileController::class, 'showChaletBooking'])->name('Owner.chaletBooking');
         });
-    
+
 //hamzeh&omayma
 
 
@@ -183,7 +180,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/users/{id}', [AdminUserController::class, 'show'])->name('admin.users.show');
     Route::get('/users/index', [AdminUserController::class, 'index'])->name('admin.users.index');
 
-    Route::get('/users/{id}/edit', [AdminUserController::class, 'edit'])->name('admin.users.edit');
+    Route::get('/users/{user}/edit', [AdminUserController::class, 'edit'])->name('admin.users.edit');
     Route::put('/users/{id}', [AdminUserController::class, 'update'])->name('admin.users.edit');
     Route::delete('/users/{id}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
     Route::post('/users/{id}/toggle-status', [AdminUserController::class, 'toggleStatus'])->name('admin.users.toggleStatus');
@@ -199,7 +196,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('/reviews/{id}', [AdminReviewController::class, 'destroy'])->name('admin.reviews.destroy');
 
     Route::get('/chalets', [AdminChaletController::class, 'index'])->name('admin.chalets.index');
-    Route::get('/chalets/{id}/edit', [AdminChaletController::class, 'edit'])->name('admin.chalets.edit');
+    Route::get('/chalets/{chalet}/edit', [AdminChaletController::class, 'edit'])->name('admin.chalets.edit');
     Route::put('/chalets/{id}', [AdminChaletController::class, 'update'])->name('admin.chalets.update');
     Route::post('/chalets/{id}/toggle-status', [AdminChaletController::class, 'toggleStatus'])->name('admin.chalets.toggleStatus');
     Route::delete('/chalets/{id}', [AdminChaletController::class, 'destroy'])->name('admin.chalets.destroy');
@@ -207,4 +204,4 @@ Route::prefix('admin')->group(function () {
     Route::get('chalets/{chalet}/deactivate', [AdminChaletController::class, 'deactivate'])->name('chalets.deactivate');
 });
 
-    
+

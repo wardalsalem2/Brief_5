@@ -9,11 +9,11 @@
     <style>
         .image-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
-            gap: 15px; 
-            width: 100%; 
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            width: 100%;
         }
-    
+
         .image-grid img {
             max-width: 100%;
             height: auto;
@@ -77,17 +77,17 @@
                     <h3 class="section-title">Chalet Image</h3>
                     <div class="d-flex flex-column align-items-center">
                         @if ($chalet->images->isNotEmpty())
-                            <img src="{{ asset('storage/' . $chalet->images->first()->image) }}" alt="Chalet Image" class="preview-image mt-3 mb-3" style="max-width: 100%; height: auto; object-fit: cover; max-height: 300px;">
+                            <img src="{{ asset($chalet->images->first()->image) }}" alt="Chalet Image" class="preview-image mt-3 mb-3" style="max-width: 100%; height: auto; object-fit: cover; max-height: 300px;">
                         @else
                             <p>No image available</p>
                         @endif
                         <div class="image-grid">
-                            @foreach($chalet->images->skip(1) as $image) 
-                                <img src="{{ asset('storage/' . $image->image) }}" alt="Chalet Image" class="preview-image mt-3 mb-3" style="max-width: 100%; height: auto; object-fit: cover;">
+                            @foreach($chalet->images->skip(1) as $image)
+                                <img src="{{ asset( $image->image) }}" alt="Chalet Image" class="preview-image mt-3 mb-3" style="max-width: 100%; height: auto; object-fit: cover;">
                             @endforeach
                         </div>
                     </div>
-                </div>               
+                </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function toggleSidebar() {
