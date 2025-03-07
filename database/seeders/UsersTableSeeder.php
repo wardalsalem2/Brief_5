@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Ward',
                 'email' => 'wardd@gmail.com',
-                'password' => Hash::make('password1234'), 
+                'password' => Hash::make(''), 
                 'role' => 'admin',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -40,8 +40,8 @@ class UsersTableSeeder extends Seeder
                 'email' => 'omayma@gmail.com',
                 'password' => Hash::make('password1234'),
                 'role' => 'owner',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => now() , 
+              'updated_at' => now(),
             ],
         ]);
     }
