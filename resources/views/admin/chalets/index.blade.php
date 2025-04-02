@@ -23,7 +23,21 @@
         </div>
 
         <div class="col-md-3">
-            <input type="text" name="location" class="form-control" placeholder="Location..." value="{{ request('location') }}">
+            <select name="location" class="form-select">
+                <option value="">Select Location</option>
+                <option value="Amman">Amman</option>
+                <option value="Zarqa">Zarqa</option>
+                <option value="Irbid">Irbid</option>
+                <option value="Ajloun">Ajloun</option>
+                <option value="Jerash">Jerash</option>
+                <option value="Mafraq">Mafraq</option>
+                <option value="Balqa">Balqa</option>
+                <option value="Madaba">Madaba</option>
+                <option value="Karak">Karak</option>
+                <option value="Tafilah">Tafilah</option>
+                <option value="Ma'an">Ma'an</option>
+                <option value="Aqaba">Aqaba</option>
+            </select>
         </div>
 
         <div class="col-md-2">
@@ -45,27 +59,30 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Location</th>
+                            <th>address</th>
                             <th>Price Per Day</th>
-                            <th>Type</th>
                             <th>Status</th>
                             <th>Owner</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
+                    
+
                         @foreach ($chalets as $chalet)
                             <tr>
                                 <td>{{ $chalet->id }}</td>
                                 <td>{{ $chalet->name }}</td>
-                                <td>{{ $chalet->location }}</td>
+                                <td>{{ $chalet->address }}</td>
                                 <td>{{ $chalet->price_per_day }} EGP</td>
-                                <td>{{ ucfirst($chalet->type) }}</td>
+                               
                                 <td>
-                                    <span class="badge {{ $chalet->status == 'available' ? 'badge-success' : 'badge-danger' }}">
+                                    <span class="badge {{ $chalet->status == 'available' ? 'bg-success' : 'bg-danger' }}">
                                         {{ ucfirst($chalet->status) }}
                                     </span>
                                 </td>
+                                
+                                
                                 <td>{{ $chalet->owner->name }}</td>
                                 <td>
                                     <a href="{{ route('admin.chalets.edit', $chalet->id) }}" class="btn btn-warning btn-sm">
@@ -80,7 +97,7 @@
                                     <form action="{{ route('admin.chalets.destroy', $chalet->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
                                             <i class="fas fa-trash"></i> Delete
                                         </button>
                                     </form>

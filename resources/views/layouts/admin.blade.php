@@ -37,21 +37,13 @@
                     <i class="fas fa-calendar-alt"></i> Manage Bookings
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-credit-card"></i> Manage Payments
-                </a>
-            </li>
+           
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.reviews.index') }}">
                     <i class="fas fa-star"></i> Manage Reviews
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-bell"></i> Manage Notifications
-                </a>
-            </li>
+          
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.reports.index') }}">
                     <i class="fas fa-chart-bar"></i> Reports & Analytics

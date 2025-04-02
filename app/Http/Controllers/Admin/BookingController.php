@@ -13,7 +13,9 @@ class BookingController extends Controller
     // Display a list of all bookings
     public function index(Request $request)
     {
-        // Search and filter
+        $users = User::all(); // جلب جميع المستخدمين
+        $chalets = Chalet::all(); // جلب جميع الشاليهات
+    
         $bookings = Booking::query()
             ->when($request->has('search'), function ($query) use ($request) {
                 $search = $request->input('search');
@@ -30,33 +32,33 @@ class BookingController extends Controller
             ->with(['user', 'chalet'])
             ->latest()
             ->paginate(10);
-
-        return view('admin.booking.index', compact('bookings'));
+    
+        return view('admin.bookings.index', compact('bookings', 'users', 'chalets'));
     }
+    
 
     // Show the form for editing a booking
     public function edit(Booking $booking)
     {
+        
         return view('admin.bookings.edit', compact('booking'));
     }
 
     // Update the booking status
-    public function update(Request $request, Booking $booking)
+   
+    public function updateStatus(Request $request, Booking $booking)
     {
         $request->validate([
             'status' => 'required|in:pending,confirmed,canceled',
         ]);
-
+    
         $booking->update(['status' => $request->input('status')]);
-
-        // Send notification to the user
         if (in_array($request->input('status'), ['confirmed', 'canceled'])) {
             $this->sendBookingStatusNotification($booking);
         }
-
-        return redirect()->route('admin.bookings.index')->with('success', 'Booking status updated successfully.');
+        return redirect()->route('admin.bookings.index')->with('success', 'Booking status updated successfully!');
     }
-
+    
     // Delete a booking
     public function destroy(Booking $booking)
     {
@@ -69,8 +71,9 @@ class BookingController extends Controller
     {
         $user = $booking->user;
         $status = $booking->status;
-
-        // Example: Send an email notification
+    
+        // إرسال إشعار إلى المستخدم
         $user->notify(new BookingStatusUpdated($status));
     }
+    
 }

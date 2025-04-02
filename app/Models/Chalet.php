@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Chalet extends Model
 {
+    
     use SoftDeletes;
 
     

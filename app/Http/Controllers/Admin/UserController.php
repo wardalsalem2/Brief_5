@@ -15,18 +15,25 @@ class UserController extends Controller
     {
         $query = User::query();
 
+
         if ($request->has('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('email', 'like', '%' . $request->search . '%');
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('email', 'like', '%' . $request->search . '%');
+            });
         }
 
-        if ($request->has('role')) {
+        if ($request->filled('role')) {
             $query->where('role', $request->role);
         }
 
+
+
+      
         $users = $query->paginate(10);
         return view('admin.users.index', compact('users'));
     }
+
 
     public function create()
     {
@@ -53,7 +60,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        
+
         return view('admin.users.edit', compact('user'));
     }
 
@@ -74,9 +81,12 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
     }
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
+        $user = User::findOrFail($id);
         $user->delete();
+    
         return redirect()->route('admin.users.index')->with('success', 'User deleted successfully.');
     }
+    
 }

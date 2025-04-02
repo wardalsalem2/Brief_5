@@ -17,22 +17,30 @@
                     <input type="text" name="name" id="name" class="form-control" value="{{ $chalet->name }}" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="location" class="font-weight-bold">Location</label>
-                    <input type="text" name="location" id="location" class="form-control" value="{{ $chalet->location }}" required>
-                </div>
+                {{-- <div class="form-group">
+                    <label for="owner_id" class="font-weight-bold">Owner</label>
+                    <select name="owner_id" id="owner_id" class="form-control" required>
+                        @foreach($owners as $owner)
+                            <option value="{{ $owner->id }}" {{ $chalet->owner && $chalet->owner->id == $owner->id ? 'selected' : '' }}>
+                                {{ $owner->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div> --}}
+                
 
+                <div class="form-group">
+                    <label for="address" class="font-weight-bold">Location</label>
+                    <select name="address" id="address" class="form-control" required>
+                        @foreach(["Amman", "Zarqa", "Irbid", "Ajloun", "Jerash", "Mafraq", "Balqa", "Madaba", "Karak", "Tafilah", "Maan", "Aqaba"] as $location)
+                            <option value="{{ $location }}" {{ $chalet->address == $location ? 'selected' : '' }}>{{ $location }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                
                 <div class="form-group">
                     <label for="price_per_day" class="font-weight-bold">Price Per Day</label>
                     <input type="number" name="price_per_day" id="price_per_day" class="form-control" value="{{ $chalet->price_per_day }}" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="type" class="font-weight-bold">Type</label>
-                    <select name="type" id="type" class="form-control" required>
-                        <option value="chalet" {{ $chalet->type == 'chalet' ? 'selected' : '' }}>Chalet</option>
-                        <option value="villa" {{ $chalet->type == 'villa' ? 'selected' : '' }}>Villa</option>
-                    </select>
                 </div>
 
                 <div class="form-group">

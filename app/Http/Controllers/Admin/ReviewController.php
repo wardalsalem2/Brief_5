@@ -16,13 +16,15 @@ class ReviewController extends Controller
     {
         $query = Review::with(['user', 'chalet']);
 
-        if ($request->has('user_id')) {
+        if ($request->filled('user_id')) {
             $query->where('user_id', $request->user_id);
         }
-        if ($request->has('chalet_id')) {
+    
+        if ($request->filled('chalet_id')) {
             $query->where('chalet_id', $request->chalet_id);
         }
-        if ($request->has('rate')) {
+    
+        if ($request->filled('rate')) {
             $query->where('rate', $request->rate);
         }
 
@@ -41,4 +43,3 @@ class ReviewController extends Controller
         return redirect()->route('admin.reviews.index')->with('success', 'تم حذف التقييم بنجاح.');
     }
 }
-

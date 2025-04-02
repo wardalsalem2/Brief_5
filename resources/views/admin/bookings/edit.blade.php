@@ -8,9 +8,9 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form action="{{ route('admin.bookings.update', $booking->id) }}" method="POST">
+            <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST">
                 @csrf
-                @method('PUT')
+                @method('PATCH')
 
                 <div class="form-group">
                     <label for="status">Status</label>

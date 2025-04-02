@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-6">
             <h4>{{ $chalet->name }}</h4>
-            <p><strong>Location:</strong> {{ $chalet->address }}</p>
+            <p><strong>address</strong> {{ $chalet->address }}</p>
             <p><strong>Description:</strong> {{ $chalet->description }}</p>
             <p><strong>Price per Day:</strong> {{ $chalet->price_per_day }} AED</p>
             <p><strong>Status:</strong> {{ $chalet->status }}</p>

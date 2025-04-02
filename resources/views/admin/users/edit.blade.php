@@ -8,8 +8,8 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
-        <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary">Edit</a>
-        @csrf
+            <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
+                @csrf
                 @method('PUT')
 
                 <div class="form-group">
@@ -27,6 +27,7 @@
                     <select name="role" class="form-control" required>
                         <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>Renter</option>
                         <option value="owner" {{ $user->role == 'owner' ? 'selected' : '' }}>Lessor</option>
+                        <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
                     </select>
                 </div>
 
